@@ -1,6 +1,8 @@
 package com.api.simplify.taskmanager.services;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +38,9 @@ public class TaskService {
 		return taskRepository.findAll().stream()
 				.map(task -> this.convertToDto(task))
 				.collect(Collectors.toList());
+	}
+
+	public Optional<TaskModel> findTask(UUID id) {
+		return taskRepository.findById(id);
 	}
 }

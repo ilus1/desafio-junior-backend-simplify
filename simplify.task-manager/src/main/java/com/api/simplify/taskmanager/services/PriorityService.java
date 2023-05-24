@@ -1,6 +1,7 @@
 package com.api.simplify.taskmanager.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,10 @@ public class PriorityService {
 	@Autowired
 	public PriorityService(PriorityRepository priorityRepository) {
 			this.priorityRepository = priorityRepository;
+	}
+	
+	public Optional<PriorityModel> findById(UUID id) {
+		return priorityRepository.findById(id);
 	}
 
 	private PriorityDto convertToDto(PriorityModel priority) {

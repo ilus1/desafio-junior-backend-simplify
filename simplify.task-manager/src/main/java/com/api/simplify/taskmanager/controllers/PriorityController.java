@@ -1,6 +1,8 @@
 package com.api.simplify.taskmanager.controllers;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,10 +46,15 @@ public class PriorityController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(priorityService.save(priority));
 	}
 
-	@PutMapping
-	public ResponseEntity<PriorityDto> editPriority(@RequestBody @Valid PriorityDto priorityDto) {
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> editPriority(@PathVariable(value = "id") UUID id,
+			@RequestBody @Valid PriorityDto editedPriorityDto) {
+		Optional<PriorityModel> editedPriorityOptional = priorityService.findById(id);
+		if (!editedPriorityOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Prioridade não encontrada.");
+		}
 		PriorityModel priority = new PriorityModel();
-		BeanUtils.copyProperties(priorityDto, priority);
+		BeanUtils.copyProperties(editedPriorityOptional.get(), priority);
 		return ResponseEntity.status(HttpStatus.OK).body(priorityService.edit(priority));
 	}
 	

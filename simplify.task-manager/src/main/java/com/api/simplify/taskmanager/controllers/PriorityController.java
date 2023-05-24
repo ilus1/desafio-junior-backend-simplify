@@ -38,11 +38,9 @@ public class PriorityController {
 
 	@PostMapping
 	public ResponseEntity<PriorityDto> savePriority(@RequestBody @Valid PriorityDto priorityDto) {
-		PriorityDto savedDto = new PriorityDto();
 		PriorityModel priority = new PriorityModel();
 		BeanUtils.copyProperties(priorityDto, priority);
-		BeanUtils.copyProperties(priorityService.save(priority), savedDto);		
-		return ResponseEntity.status(HttpStatus.CREATED).body(savedDto);
+		return ResponseEntity.status(HttpStatus.CREATED).body(priorityService.save(priority));
 	}
 
 	@PutMapping

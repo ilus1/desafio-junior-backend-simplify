@@ -40,7 +40,7 @@ public class PriorityService {
 	}
 
 	public PriorityDto edit(PriorityModel priority) {
-		return this.convertToDto(this.save(priority));
+		return this.save(priority);
 	}
 
 	public String deletePriority(UUID id) {
@@ -53,7 +53,7 @@ public class PriorityService {
 	}
 
 	@Transactional
-	public PriorityModel save(PriorityModel priority) {
-		return priorityRepository.save(priority);
+	public PriorityDto save(PriorityModel priority) {
+		return convertToDto(priorityRepository.save(priority));
 	}
 }

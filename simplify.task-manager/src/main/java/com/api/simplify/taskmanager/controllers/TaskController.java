@@ -64,4 +64,13 @@ public class TaskController {
 		BeanUtils.copyProperties(editedTaskOptional.get(), task);
 		return ResponseEntity.status(HttpStatus.OK).body(taskService.edit(task));
 	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> deleteTask(@PathVariable(value = "id") UUID id) {
+		Optional<TaskModel> editedTaskOptional = taskService.findById(id);
+		if (!editedTaskOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada.");
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(taskService.deleteTask(id));
+	}
 }

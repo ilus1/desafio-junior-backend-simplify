@@ -47,4 +47,13 @@ public class TaskService {
 	public TaskDto edit(TaskModel task) {
 		return this.save(task);
 	}
+
+	public String deleteTask(UUID id) {
+		try {
+			taskRepository.deleteById(id);
+			return "Tarefa removida com sucesso.";
+		} catch (Exception e) {
+			return "Tarefa não foi encontrada.";
+		}
+	}
 }

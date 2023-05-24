@@ -22,16 +22,16 @@ public class TaskModel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
-	
+
 	@Column(nullable = false)
 	private String name;
-	
+
 	@Column
 	private String description;
-	
-	@Column()
+
+	@Column
 	private Boolean accomplished;
-	
-	@Column()
+
+	@Column
 	private PriorityModel priority;
 }

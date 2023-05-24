@@ -16,28 +16,33 @@ import jakarta.transaction.Transactional;
 public class PriorityService {
 
 
-    private PriorityRepository priorityRepository;
+	private PriorityRepository priorityRepository;
 
-    @Autowired
-    public PriorityService(PriorityRepository priorityRepository) {
-        this.priorityRepository = priorityRepository;
-    }
-    
-    public List<PriorityDto> getPriorities() {
-    	return priorityRepository.findAll().stream()
-    			.map(priority -> this.convertToDto(priority))
-    			.collect(Collectors.toList());
-    }
-    
-    private PriorityDto convertToDto(PriorityModel priority) {
-    	PriorityDto dto = new PriorityDto();
-    	dto.setId(priority.getId());
-    	dto.setColor(priority.getColor());
-    	dto.setName(priority.getName());
-    	
-    	return dto;
-    }
-	
+	@Autowired
+	public PriorityService(PriorityRepository priorityRepository) {
+			this.priorityRepository = priorityRepository;
+	}
+
+	private PriorityDto convertToDto(PriorityModel priority) {
+		PriorityDto dto = new PriorityDto();
+		dto.setId(priority.getId());
+		dto.setColor(priority.getColor());
+		dto.setName(priority.getName());
+
+		return dto;
+	}
+
+	public List<PriorityDto> getPriorities() {
+		return priorityRepository.findAll().stream()
+				.map(priority -> this.convertToDto(priority))
+				.collect(Collectors.toList());
+	}
+
+	public PriorityDto edit(PriorityModel priority) {
+		return this.convertToDto(this.save(priority));
+	}
+
+
 	@Transactional
 	public PriorityModel save(PriorityModel priority) {
 		return priorityRepository.save(priority);

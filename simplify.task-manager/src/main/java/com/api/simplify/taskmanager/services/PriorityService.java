@@ -1,6 +1,7 @@
 package com.api.simplify.taskmanager.services;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,14 @@ public class PriorityService {
 		return this.convertToDto(this.save(priority));
 	}
 
+	public String deletePriority(UUID id) {
+		try {
+			priorityRepository.deleteById(id);
+			return "Prioridade removida com sucesso.";
+		} catch (Exception e) {
+			return "Prioridade não foi encontrada.";
+		}
+	}
 
 	@Transactional
 	public PriorityModel save(PriorityModel priority) {

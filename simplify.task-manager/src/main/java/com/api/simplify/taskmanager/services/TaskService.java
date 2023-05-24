@@ -1,5 +1,8 @@
 package com.api.simplify.taskmanager.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +15,7 @@ public class TaskService {
 
 	@Autowired
 	TaskRepository taskRepository;
-	
+
 
 	private TaskDto convertToDto(TaskModel task) {
 		TaskDto dto = new TaskDto();
@@ -24,8 +27,14 @@ public class TaskService {
 
 		return dto;
 	}
-	
+
 	public TaskDto save(TaskModel newTask) {
 		return convertToDto(taskRepository.save(newTask));
+	}
+
+	public List<TaskDto> getTasks() {
+		return taskRepository.findAll().stream()
+				.map(task -> this.convertToDto(task))
+				.collect(Collectors.toList());
 	}
 }

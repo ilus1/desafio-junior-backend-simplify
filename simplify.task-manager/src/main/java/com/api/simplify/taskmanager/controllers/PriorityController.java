@@ -58,8 +58,12 @@ public class PriorityController {
 		return ResponseEntity.status(HttpStatus.OK).body(priorityService.edit(priority));
 	}
 	
-	@DeleteMapping
-	public ResponseEntity<String> deletePriority(@RequestBody PriorityDto priority) {
-		return ResponseEntity.status(HttpStatus.OK).body(priorityService.deletePriority(priority.getId()));
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> deletePriority(@PathVariable(value = "id") UUID id) {
+		Optional<PriorityModel> editedPriorityOptional = priorityService.findById(id);
+		if (!editedPriorityOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Prioridade não encontrada.");
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(priorityService.deletePriority(id));
 	}
 }

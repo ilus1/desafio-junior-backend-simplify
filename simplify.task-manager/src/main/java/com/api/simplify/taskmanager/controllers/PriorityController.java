@@ -29,6 +29,11 @@ public class PriorityController {
         this.priorityService = priorityService;
     }
 
+	@GetMapping
+	public ResponseEntity<List<PriorityDto>> getPriorityList() {
+		return ResponseEntity.status(HttpStatus.OK).body(priorityService.getPriorities());
+	}
+
 	@PostMapping
 	public ResponseEntity<PriorityDto> savePriority(@RequestBody @Valid PriorityDto priorityDto) {
 		PriorityDto savedDto = new PriorityDto();

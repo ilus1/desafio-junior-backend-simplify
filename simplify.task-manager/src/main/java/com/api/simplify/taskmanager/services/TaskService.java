@@ -40,7 +40,11 @@ public class TaskService {
 				.collect(Collectors.toList());
 	}
 
-	public Optional<TaskModel> findTask(UUID id) {
+	public Optional<TaskModel> findById(UUID id) {
 		return taskRepository.findById(id);
+	}
+
+	public TaskDto edit(TaskModel task) {
+		return this.save(task);
 	}
 }

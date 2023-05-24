@@ -48,7 +48,7 @@ public class PriorityController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> editPriority(@PathVariable(value = "id") UUID id,
-			@RequestBody @Valid PriorityDto editedPriorityDto) {
+			@RequestBody PriorityDto editedPriorityDto) {
 		Optional<PriorityModel> editedPriorityOptional = priorityService.findById(id);
 		if (!editedPriorityOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Prioridade não encontrada.");
@@ -57,7 +57,7 @@ public class PriorityController {
 		BeanUtils.copyProperties(editedPriorityOptional.get(), priority);
 		return ResponseEntity.status(HttpStatus.OK).body(priorityService.edit(priority));
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deletePriority(@PathVariable(value = "id") UUID id) {
 		Optional<PriorityModel> editedPriorityOptional = priorityService.findById(id);

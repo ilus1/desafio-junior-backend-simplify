@@ -1,12 +1,10 @@
-package com.api.simplify.taskmanager;
+package com.api.simplify.taskmanager.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
-
-import com.api.simplify.taskmanager.models.PriorityModel;
 
 public class PriorityModelTest {
 

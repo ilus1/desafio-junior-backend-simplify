@@ -3,14 +3,13 @@ import PropTypes from "prop-types"
 import Priority from "../Priority";
 import Title from "../Title";
 import Text from "../Text";
-import { Container, Header, Body, CloseButton } from "./styles"
+import { Container, Header, Body } from "./styles"
 
 
-const TaskInfo = ({ task, onClose }) => {
+const TaskInfo = ({ task }) => {
   const { name, priority, description } = task;
   return (
     <Container>
-      <CloseButton onClick={() => onClose()} />
       <Header>
         <Title title={name} />
         <Priority priority={priority} />

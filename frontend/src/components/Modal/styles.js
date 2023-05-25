@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CloseIcon from '@mui/icons-material/Close';
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -17,5 +18,16 @@ export const ModalContainer = styled.div`
 
   &:select {
     border: none;
+  }
+`;
+
+export const CloseButton = styled(CloseIcon)`
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+
+  &:hover {
+    color: #FF0000;
   }
 `;

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import { Modal as ModalComponent } from '@mui/material';
-import { ModalContainer } from './styles';
+import { ModalContainer, CloseButton } from './styles';
 
 const Modal = ({ children, open, onClose }) => {
   return (
@@ -12,6 +12,7 @@ const Modal = ({ children, open, onClose }) => {
       aria-describedby="modal-modal-description"
     >
       <ModalContainer>
+        <CloseButton onClick={() => onClose()} />
         {children}
       </ModalContainer>
     </ModalComponent>

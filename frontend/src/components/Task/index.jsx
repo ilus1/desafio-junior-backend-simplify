@@ -5,6 +5,7 @@ import TaskInfo from '../TaskInfo';
 import Modal from '../Modal';
 import Priority from '../Priority';
 import { Container, TaskName, Checked } from './styles';
+import TaskActions from '../TaskActions';
 
 
 const Task = ({ task }) => {
@@ -25,6 +26,7 @@ const Task = ({ task }) => {
         {accomplished && <Checked />}
         <TaskName>{name}</TaskName>
         {priority && <Priority priority={priority} />}
+        <TaskActions task={task} />
       </Container>
     </>
   )

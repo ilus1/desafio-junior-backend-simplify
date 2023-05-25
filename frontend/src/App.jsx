@@ -1,34 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
+import TaskColumn from './components/TaskColumn'
+import Task from './components/Task'
+
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
+      <TaskColumn title="Lista de tarefas">
+        <Task task={{ id: 1, name: 'Tarefa 1', description: 'Descrição da tarefa 1', accomplished: true }} />
+        <Task task={{ id: 2, name: 'Tarefa 2', description: 'Descrição da tarefa 2', accomplished: false }} />
+        <Task task={{ id: 3, name: 'Tarefa 3', description: 'Descrição da tarefa 3', accomplished: false, priority: { name: 'Alta', color: '#F00000'} }} />
+      </TaskColumn>
+    </div>
   )
 }
 

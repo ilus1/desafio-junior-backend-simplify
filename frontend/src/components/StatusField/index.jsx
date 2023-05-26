@@ -7,7 +7,7 @@ const StatusField = ({ label, value, onChange }) => {
   return (
     <Container>
       <Label>{label}</Label>
-      <Input type="checkbox" value={value} onChange={onChange} />
+      <Input type="checkbox" value={value} onChange={onChange} checked={value} />
     </Container>
   );
 }

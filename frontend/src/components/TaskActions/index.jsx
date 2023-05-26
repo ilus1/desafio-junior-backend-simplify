@@ -1,13 +1,20 @@
 import Proptypes from 'prop-types';
+import { useState } from 'react';
 
+import Modal from '../Modal';
+import Taskform from '../TaskForm';
 import { Container, EditButton, DeleteButton } from './styles';
 
 const TaskActions = ({ task }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [modalStyle, setModalStyle] = useState(null);
   const { id } = task;
 
   const handleEditTask = (e) => {
     e.stopPropagation();
     console.log('Editando tarefa: ', id);
+    setModalStyle(<Taskform task={task} onClose={() => setShowModal(false)}/>)
+    setShowModal(true);
   }
 
   const handleDeleteTask = (e) => {
@@ -19,6 +26,11 @@ const TaskActions = ({ task }) => {
     <Container>
       <EditButton onClick={(e) => handleEditTask(e)} />
       <DeleteButton onClick={(e) => handleDeleteTask(e)} />
+      { showModal && (
+        <Modal open={showModal} onClose={() => setShowModal(false)}>
+          {modalStyle}
+        </Modal>
+      )}
     </Container>
   )
 }

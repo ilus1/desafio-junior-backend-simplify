@@ -25,8 +25,32 @@ const TaskForm = ({ task, onClose }) => {
       });
   }, []);
 
+  useEffect(() => {
+    if (task) {
+      setName(task.name);
+      setDescription(task.description && task.description);
+      setPriority(task.priority ? task.priority.id : false);
+      setStatus(task.accomplished);
+    }
+  }, [task]);
+
+
+  const editTask = () => {
+    axios.put(`http://localhost:8080/task/${task.id}`, {
+      name,
+      description,
+      priority: priorities.find(p => p.id === priority),
+      accomplished: status,
+    }).then(response => {
+      console.log(response);
+    }).catch(error => {
+      console.log(error);
+    });
+
+    onClose();
+  }
+
   const saveTask = () => {
-    console.log(priority)
     axios.post('http://localhost:8080/task', {
       name,
       description,
@@ -44,11 +68,11 @@ const TaskForm = ({ task, onClose }) => {
   return (
     <Container>
       <Title title={ task ? "Editar Tarefa" : "Nova tarefa"} />
-      <Field label="Nome" value={name} onChange={(name) => setName(name)} placeholder="Digite o nome da tarefa" />
-      <Field label="Descrição" value={description} onChange={(desc) => setDescription(desc)} placeholder="Descrição da tarefa" />
+      <Field label="Nome:" value={name} onChange={(name) => setName(name)} placeholder="Digite o nome da tarefa" />
+      <Field label="Descrição:" value={description} onChange={(desc) => setDescription(desc)} placeholder="Descrição da tarefa" />
+      <PriorityField label="Prioridade:" choices={priorities} value={priority} onChange={(priority) => setPriority(priority)} />
       <StatusField label="Finalizada" value={status} onChange={() => setStatus(!status)} />
-      <PriorityField label="Prioridade" choices={priorities} value={priority} onChange={(priority) => setPriority(priority)} />
-      <SaveButton onClick={() => saveTask()}>Salvar</SaveButton>
+      <SaveButton onClick={() => task ? editTask() : saveTask()}>Salvar</SaveButton>
     </Container>
   )
 }
@@ -56,6 +80,10 @@ const TaskForm = ({ task, onClose }) => {
 TaskForm.propTypes = {
   task: PropTypes.object,
   onClose: PropTypes.func.isRequired,
+}
+
+TaskForm.defaultProps = {
+  task: null,
 }
 
 export default TaskForm;

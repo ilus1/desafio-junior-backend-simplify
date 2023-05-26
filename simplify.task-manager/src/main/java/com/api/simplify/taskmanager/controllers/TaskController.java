@@ -61,7 +61,8 @@ public class TaskController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada.");
 		}
 		TaskModel task = new TaskModel();
-		BeanUtils.copyProperties(editedTaskOptional.get(), task);
+		BeanUtils.copyProperties(editedTaskDto, task);
+		task.setId(id);
 		return ResponseEntity.status(HttpStatus.OK).body(taskService.edit(task));
 	}
 

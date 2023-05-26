@@ -35,3 +35,9 @@ export const Checked = styled(CheckCircleOutlineIcon)`
 
   margin-left: 10px;
 `;
+
+export const InfoContainer = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+`

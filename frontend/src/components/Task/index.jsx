@@ -4,7 +4,7 @@ import { useState } from 'react';
 import TaskInfo from '../TaskInfo';
 import Modal from '../Modal';
 import Priority from '../Priority';
-import { Container, TaskName, Checked } from './styles';
+import { Container, TaskName, Checked, InfoContainer } from './styles';
 import TaskActions from '../TaskActions';
 
 
@@ -19,15 +19,17 @@ const Task = ({ task }) => {
 
   return (
     <>
+      <Container>
+        <InfoContainer onClick={() => onClick()}>
+          {accomplished && <Checked />}
+          <TaskName>{name}</TaskName>
+          {priority && <Priority priority={priority} />}
+        </InfoContainer>
+        <TaskActions task={task} />
+      </Container>
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <TaskInfo task={task} onClose={() => setIsModalOpen(false)} />
       </Modal>
-      <Container onClick={() => onClick()}>
-        {accomplished && <Checked />}
-        <TaskName>{name}</TaskName>
-        {priority && <Priority priority={priority} />}
-        <TaskActions task={task} />
-      </Container>
     </>
   )
 }

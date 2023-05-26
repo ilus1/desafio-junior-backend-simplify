@@ -7,8 +7,9 @@ export const Container = styled.div`
   flex-direction: row;
   align-items: center;
 
-  margin-right: 10px;
-  margin-left: auto;
+  width: fit-content;
+
+  margin: 0 10px;
 `;
 
 export const EditButton = styled(CreateIcon)`

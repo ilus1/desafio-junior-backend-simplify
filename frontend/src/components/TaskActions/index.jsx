@@ -13,14 +13,12 @@ const TaskActions = ({ task }) => {
 
   const handleEditTask = (e) => {
     e.stopPropagation();
-    console.log('Editando tarefa: ', id);
     setModalStyle(<Taskform task={task} onClose={() => setShowModal(false)}/>)
     setShowModal(true);
   }
 
   const handleDeleteTask = (e) => {
     e.stopPropagation();
-    console.log('Deletando tarefa: ', id);
     setModalStyle(<ConfirmationModal taskId={id} onClose={() => setShowModal(false)}/>)
     setShowModal(true);
   }

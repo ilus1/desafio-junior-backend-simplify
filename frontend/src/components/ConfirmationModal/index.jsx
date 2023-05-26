@@ -18,7 +18,6 @@ const ConfirmationModal = ({ taskId, onClose }) => {
   const handleConfirm = () => {
     axios.delete(`http://localhost:8080/task/${taskId}`)
       .then(() => {
-        console.log('Tarefa excluída com sucesso!');
         setTasks(tasks.filter(t => t.id !== taskId).sort(sortByName));
       })
       .catch((err) => {

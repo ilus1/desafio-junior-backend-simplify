@@ -46,7 +46,6 @@ const TaskForm = ({ task, onClose }) => {
       priority: priorities.find(p => p.id === priority),
       accomplished: status,
     }).then(response => {
-      console.log(response);
       setTasks(tasks.map(t => t.id === task.id ? response.data : t).sort(sortByName));
     }).catch(error => {
       console.log(error);
@@ -66,7 +65,6 @@ const TaskForm = ({ task, onClose }) => {
     axios.post('http://localhost:8080/task', {
       ...newTask,
     }).then(response => {
-      console.log(response);
       setTasks([...tasks, response.data].sort(sortByName));
     }).catch(error => {
       console.log(error);

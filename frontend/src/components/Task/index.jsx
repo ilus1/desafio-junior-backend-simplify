@@ -14,7 +14,6 @@ const Task = ({ task }) => {
 
   const onClick = () => {
     setIsModalOpen(true);
-    console.log('Clicou na tarefa');
   }
 
   return (

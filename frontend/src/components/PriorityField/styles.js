@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import AddIcon from '@mui/icons-material/Add';
 
 export const Container = styled.div`
   display: flex;
@@ -23,4 +24,22 @@ export const Select = styled.select`
   padding: 0 15px;
   font-size: 16px;
   color: #444;
+`;
+
+export const AddButton = styled(AddIcon)`
+  max-height: 15px;
+  max-width: 15px;
+
+  color: #ffffff;
+  padding: 3px;
+  border: none;
+  border-radius: 50%;
+  background-color: #ddd;
+  cursor: pointer;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #30a11c;
+  }
 `;

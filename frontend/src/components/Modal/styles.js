@@ -5,11 +5,11 @@ export const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   position: absolute;
-  left: calc(50% - 300px);
-  top: calc(50% - 250px);
+  left: calc(50% - 140px);
+  top: calc(50% - 200px);
 
-  width: 500px;
-  height: 400px;
+  width: 270px;
+  height: 200px;
   padding: 30px;
 
   background: white;

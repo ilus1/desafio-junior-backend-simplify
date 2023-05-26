@@ -4,6 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Text from '../Text';
 import Modal from '../Modal';
 import { Container } from './styles';
+import TaskForm from '../TaskForm';
 
 
 const NewTaskButton = () => {
@@ -16,6 +17,7 @@ const NewTaskButton = () => {
         <Text text="Adicionar nova tarefa" />
       </Container>
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <TaskForm onClose={() => setIsModalOpen(false)} />
       </Modal>
     </>
   );

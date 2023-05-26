@@ -12,14 +12,14 @@ export const SaveButton = styled.button`
   height: 30px;
   border: none;
   border-radius: 5px;
-  background-color: #ccc;
+  background-color: #45c92d;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: #999;
+    background-color: #30a11c;
   }
 `;
 

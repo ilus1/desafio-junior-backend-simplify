@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 `;
 
 export const ButtonsContainer = styled.div`
@@ -31,7 +32,6 @@ export const ConfirmButton = styled.button`
 export const CancelButton = styled.button`
   margin-top: 20px;
   padding: 5px 20px;
-  height: 40px;
   background-color: #9a9d99;
   color: #fff;
 

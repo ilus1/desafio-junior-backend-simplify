@@ -6,6 +6,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.api.simplify.taskmanager.dtos.TaskDto;
@@ -35,7 +36,7 @@ public class TaskService {
 	}
 
 	public List<TaskDto> getTasks() {
-		return taskRepository.findAll().stream()
+		return taskRepository.findAll(Sort.by("name")).stream()
 				.map(task -> this.convertToDto(task))
 				.collect(Collectors.toList());
 	}

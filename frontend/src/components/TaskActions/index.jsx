@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Modal from '../Modal';
 import Taskform from '../TaskForm';
+import ConfirmationModal from '../ConfirmationModal';
 import { Container, EditButton, DeleteButton } from './styles';
 
 const TaskActions = ({ task }) => {
@@ -20,6 +21,8 @@ const TaskActions = ({ task }) => {
   const handleDeleteTask = (e) => {
     e.stopPropagation();
     console.log('Deletando tarefa: ', id);
+    setModalStyle(<ConfirmationModal taskId={id} onClose={() => setShowModal(false)}/>)
+    setShowModal(true);
   }
 
   return (

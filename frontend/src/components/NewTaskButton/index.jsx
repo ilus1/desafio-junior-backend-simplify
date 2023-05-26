@@ -1,24 +1,26 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 
+import { ModalContext } from '../../contexts/ModalContext';
 import Text from '../Text';
-import Modal from '../Modal';
 import { Container } from './styles';
 import TaskForm from '../TaskForm';
 
 
 const NewTaskButton = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setShowModal, setModalType } = useContext(ModalContext);
+
+  const onHandleNewTask = () => {
+    setShowModal(true);
+    setModalType(<TaskForm onClose={() => setShowModal(false)} />);
+  }
 
   return (
     <>
-      <Container onClick={() => setIsModalOpen(true)}>
+      <Container onClick={() => onHandleNewTask()}>
         <AddIcon />
         <Text text="Adicionar nova tarefa" />
       </Container>
-      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <TaskForm onClose={() => setIsModalOpen(false)} />
-      </Modal>
     </>
   );
 }

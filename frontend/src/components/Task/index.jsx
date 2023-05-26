@@ -1,19 +1,20 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useContext } from 'react';
 
 import TaskInfo from '../TaskInfo';
-import Modal from '../Modal';
 import Priority from '../Priority';
+import ModalContext from '../../contexts/ModalContext';
 import { Container, TaskName, Checked, InfoContainer } from './styles';
 import TaskActions from '../TaskActions';
 
 
 const Task = ({ task }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { name, priority, accomplished } = task;
+  const { setShowModal, setModalType } = useContext(ModalContext);
 
   const onClick = () => {
-    setIsModalOpen(true);
+    setShowModal(true);
+    setModalType(<TaskInfo task={task} onClose={() => setShowModal(false)} />)
   }
 
   return (
@@ -26,9 +27,6 @@ const Task = ({ task }) => {
         </InfoContainer>
         <TaskActions task={task} />
       </Container>
-      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <TaskInfo task={task} onClose={() => setIsModalOpen(false)} />
-      </Modal>
     </>
   )
 }

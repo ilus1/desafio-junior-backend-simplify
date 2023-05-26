@@ -5,6 +5,7 @@ import axios from 'axios';
 import Title from '../Title';
 import Field from '../Field';
 import { sortByName } from '../../utils/sortUtils';
+import ModalContext from '../../contexts/ModalContext';
 import { TasksContext } from '../../contexts/TasksContext';
 import StatusField from '../StatusField';
 import PriorityField from '../PriorityField';
@@ -17,6 +18,7 @@ const TaskForm = ({ task, onClose }) => {
   const [priority, setPriority] = useState(null);
   const [priorities, setPriorities] = useState([]);
 
+  const { setShowModal } = useContext(ModalContext);
   const { tasks, setTasks } = useContext(TasksContext);
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const TaskForm = ({ task, onClose }) => {
       console.log(error);
     });
 
-    onClose();
+    setShowModal(false);
   }
 
   const saveTask = () => {
@@ -70,15 +72,15 @@ const TaskForm = ({ task, onClose }) => {
       console.log(error);
     });
 
-    onClose();
+    setShowModal(false);
   }
 
   return (
     <Container>
-      <Title title={ task ? "Editar Tarefa" : "Nova tarefa"} />
+      <Title title={task ? "Editar Tarefa" : "Nova tarefa"} />
       <Field label="Nome:" value={name} onChange={(name) => setName(name)} placeholder="Digite o nome da tarefa" />
       <Field label="Descrição:" value={description} onChange={(desc) => setDescription(desc)} placeholder="Descrição da tarefa" />
-      <PriorityField label="Prioridade:" choices={priorities} value={priority} onChange={(priority) => setPriority(priority)} />
+      <PriorityField label="Prioridade:" choices={priorities} value={priority} onChange={(priority) => setPriority(priority)} onClose={onClose}/>
       <StatusField label="Finalizada" value={status} onChange={() => setStatus(!status)} />
       <SaveButton onClick={() => task ? editTask() : saveTask()}>Salvar</SaveButton>
     </Container>

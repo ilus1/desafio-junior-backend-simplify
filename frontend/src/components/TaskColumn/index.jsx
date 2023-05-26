@@ -22,7 +22,6 @@ const TaskColumn = () => {
 }
 
 TaskColumn.propTypes = {
-  title: PropTypes.string.isRequired,
   children: PropTypes.node,
 };
 

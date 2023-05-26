@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-
 import './App.css'
 import TaskColumn from './components/TaskColumn'
 import { TasksProvider } from './contexts/TasksContext'
+import { ModalProvider } from './contexts/ModalContext'
 
 function App() {
   return (
     <TasksProvider>
-      <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
-        <TaskColumn />
-      </div>
+      <ModalProvider>
+        <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%'}}>
+          <TaskColumn />
+        </div>
+      </ModalProvider>
     </TasksProvider>
   )
 }

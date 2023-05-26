@@ -16,12 +16,3 @@ export const Container = styled.div`
   max-height: 80vh;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 `;
-
-export const Header = styled.div`
-  display: flex;
-  justify-content: center;
-  text
-
-  padding: 10px;
-  margin: 10px 0 20px 0;
-`;

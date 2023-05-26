@@ -1,11 +1,16 @@
+import { useContext } from 'react';
 import Proptypes from 'prop-types';
 import axios from 'axios';
 
+import { sortByName } from '../../utils/sortUtils';
+import { TasksContext } from '../../contexts/TasksContext';
 import Title from '../Title';
 import Text from '../Text';
 import { ButtonsContainer, CancelButton, ConfirmButton, Container } from './styles';
 
 const ConfirmationModal = ({ taskId, onClose }) => {
+  const { tasks, setTasks } = useContext(TasksContext);
+
   const handleCancel = () => {
     onClose();
   }
@@ -14,6 +19,7 @@ const ConfirmationModal = ({ taskId, onClose }) => {
     axios.delete(`http://localhost:8080/task/${taskId}`)
       .then(() => {
         console.log('Tarefa excluída com sucesso!');
+        setTasks(tasks.filter(t => t.id !== taskId).sort(sortByName));
       })
       .catch((err) => {
         console.log('Erro ao excluir tarefa: ', err);

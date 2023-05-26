@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import Title from '../Title';
 import Field from '../Field';
+import { sortByName } from '../../utils/sortUtils';
+import { TasksContext } from '../../contexts/TasksContext';
 import StatusField from '../StatusField';
 import PriorityField from '../PriorityField';
 import { Container, SaveButton } from './styles';
@@ -14,6 +16,8 @@ const TaskForm = ({ task, onClose }) => {
   const [status, setStatus] = useState(false);
   const [priority, setPriority] = useState(null);
   const [priorities, setPriorities] = useState([]);
+
+  const { tasks, setTasks } = useContext(TasksContext);
 
   useEffect(() => {
     axios.get('http://localhost:8080/priority')
@@ -43,6 +47,7 @@ const TaskForm = ({ task, onClose }) => {
       accomplished: status,
     }).then(response => {
       console.log(response);
+      setTasks(tasks.map(t => t.id === task.id ? response.data : t).sort(sortByName));
     }).catch(error => {
       console.log(error);
     });
@@ -51,13 +56,18 @@ const TaskForm = ({ task, onClose }) => {
   }
 
   const saveTask = () => {
-    axios.post('http://localhost:8080/task', {
+    const newTask = {
       name,
       description,
       priority: priorities.find(p => p.id === priority),
       accomplished: status,
+    }
+
+    axios.post('http://localhost:8080/task', {
+      ...newTask,
     }).then(response => {
       console.log(response);
+      setTasks([...tasks, response.data].sort(sortByName));
     }).catch(error => {
       console.log(error);
     });

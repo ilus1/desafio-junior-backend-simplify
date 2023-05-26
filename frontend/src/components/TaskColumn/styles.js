@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
 
@@ -13,6 +14,6 @@ export const Container = styled.div`
 
   width: 20vw;
   min-height: 60vh;
-  max-height: 80vh;
+  max-height: 100vh;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 `;
